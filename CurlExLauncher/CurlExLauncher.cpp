@@ -33,7 +33,7 @@ int _tmain(int argc, LPTSTR argv[])
 
 	strCurlPath += TEXT("\\CurlEx.exe");
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < nProcesses; i++)
 	{
 		
 		strParam.Format(TEXT("%s %d %d +"),strFilePath,n,nStep);

@@ -83,7 +83,7 @@ int _tmain(int argc, LPTSTR argv[])
 
 		}
 	}
-	else
+	else if (strOpMode == TEXT("-"))
 	{
 		for (int i = nStart; i > nStart - nCount; i--)
 		{
@@ -112,8 +112,27 @@ int _tmain(int argc, LPTSTR argv[])
 			}
 		}
 	}
-	
-	
+	else if (strOpMode == TEXT("DZ"))
+	{
+		for (int i = nStart; i < nStart + nCount; i++)
+		{
+			strFileName.Format(TEXT("%s\\%07d.html"), strFilePath, i);
+			if (IsFileExists(strFileName))
+			{
+				DWORD dwFileSizeHi = 0;
+				BOOL bDelete = FALSE;
+				HANDLE hFile = CreateFile(strFileName, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+				if (hFile == INVALID_HANDLE_VALUE)
+					continue;
+				DWORD dwFileSizeLo = GetFileSize(hFile, &dwFileSizeHi);
+				CloseHandle(hFile);
+				if (dwFileSizeLo == 0)
+					bDelete = DeleteFile(strFileName);
+				cout << "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b";
+				cout << "文件ID:" << i << " " << ((bDelete == TRUE) ? "删除成功" : "删除失败");
+			}
+		}
+	}
 	return 0;
 }
 

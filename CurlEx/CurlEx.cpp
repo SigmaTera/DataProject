@@ -126,7 +126,7 @@ int _tmain(int argc, LPTSTR argv[])
 					continue;
 				DWORD dwFileSizeLo = GetFileSize(hFile, &dwFileSizeHi);
 				CloseHandle(hFile);
-				if (dwFileSizeLo == 0)
+				if (dwFileSizeLo == 0 || dwFileSizeLo == 5956)
 					bDelete = DeleteFile(strFileName);
 				cout << "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b";
 				cout << "文件ID:" << i << " " << ((bDelete == TRUE) ? "删除成功" : "删除失败");
